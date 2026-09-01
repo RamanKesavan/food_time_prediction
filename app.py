@@ -12,15 +12,23 @@ def load_bundle():
 
 try:
     bundle = load_bundle()
+
     model = bundle["model"]
     scaler = bundle["scaler"]
-    vehicle_classes = bundle["vehicle_classes"]
-    feature_order = bundle["feature_order"]
+
+    vehicle_classes = ["Motorcycle", "Scooter", "Electric"]
+
+    feature_order = [
+        "Delivery_person_Age",
+        "Restaurant_latitude",
+        "Restaurant_longitude",
+        "Delivery_location_latitude",
+        "Delivery_location_longitude",
+        "Type_of_vehicle"
+    ]
+
 except FileNotFoundError:
-    st.error(
-        "model_bundle.pkl not found. Run train_and_save.py locally with "
-        "deliverytime.csv first, then place model_bundle.pkl next to app.py."
-    )
+    st.error("model_bundle.pkl not found.")
     st.stop()
 
 st.title("🛵 Delivery Time Predictor")
